@@ -2,9 +2,11 @@ package org.rest;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class TestAutomateGet {
@@ -41,7 +43,7 @@ public class TestAutomateGet {
         System.out.println(response.asString());
     }
 
-    @Test
+//    @Test
     public void extract_single_value_from_response() {
         Response response =
                 given().
@@ -61,5 +63,54 @@ public class TestAutomateGet {
 
         //groovy
         System.out.println("Groovy -> Workspace name = " + response.path("workspaces[0].name"));
+    }
+
+//    @Test
+    public void hamcrest_assert_on_extracted_response() {
+        String name =
+                given().
+                        baseUri("https://api.postman.com/").
+                        header("x-api-key","PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594").
+
+                        when().
+                        get("/workspaces").
+
+                        then().
+                        assertThat().statusCode(200).
+                        extract().response().path("workspaces[0].name");
+
+        System.out.println(name);
+
+        assertThat(name, equalTo("My Workspace3"));
+        //or
+        Assert.assertEquals(name, "My Workspace3");
+    }
+
+    @Test
+    public void hamcrestContains() {
+        given().
+                baseUri("https://api.postman.com/").
+                header("x-api-key","PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594").
+                when().
+                get("/workspaces").
+                then().
+                log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("workspaces.name", contains("My Workspace3", "My Workspace4", "My Workspace5"));
+    }
+
+    @Test
+    public void hamcrestContainsInAnyOrder() {
+        given().
+                baseUri("https://api.postman.com/").
+                header("x-api-key","PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594").
+                when().
+                get("/workspaces").
+                then().
+                log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("workspaces.name", containsInAnyOrder("My Workspace4", "My Workspace3", "My Workspace5"));
     }
 }
