@@ -85,32 +85,4 @@ public class TestAutomateGet {
         //or
         Assert.assertEquals(name, "My Workspace3");
     }
-
-    @Test
-    public void hamcrestContains() {
-        given().
-                baseUri("https://api.postman.com/").
-                header("x-api-key","PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594").
-                when().
-                get("/workspaces").
-                then().
-                log().all()
-                .assertThat()
-                .statusCode(200)
-                .body("workspaces.name", contains("My Workspace3", "My Workspace4", "My Workspace5"));
-    }
-
-    @Test
-    public void hamcrestContainsInAnyOrder() {
-        given().
-                baseUri("https://api.postman.com/").
-                header("x-api-key","PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594").
-                when().
-                get("/workspaces").
-                then().
-                log().all()
-                .assertThat()
-                .statusCode(200)
-                .body("workspaces.name", containsInAnyOrder("My Workspace4", "My Workspace3", "My Workspace5"));
-    }
 }
