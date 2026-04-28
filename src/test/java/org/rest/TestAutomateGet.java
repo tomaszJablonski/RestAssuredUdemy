@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.*;
 
 public class TestAutomateGet {
 
-//    @Test
+    @Test
     public void getPositiveAssertBody() {
         given().
                 baseUri("https://api.postman.com/").
@@ -29,7 +29,7 @@ public class TestAutomateGet {
                         "workspaces.name", hasItem("My Workspace5"));
     }
 
-//    @Test
+    @Test
     public void extract_response() {
         Response response = given().
                 baseUri("https://api.postman.com/").
@@ -43,7 +43,7 @@ public class TestAutomateGet {
         System.out.println(response.asString());
     }
 
-//    @Test
+    @Test
     public void extract_single_value_from_response() {
         Response response =
                 given().
@@ -65,7 +65,7 @@ public class TestAutomateGet {
         System.out.println("Groovy -> Workspace name = " + response.path("workspaces[0].name"));
     }
 
-//    @Test
+    @Test
     public void hamcrest_assert_on_extracted_response() {
         String name =
                 given().

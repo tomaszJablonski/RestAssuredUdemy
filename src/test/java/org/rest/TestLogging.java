@@ -46,15 +46,15 @@ public class TestLogging {
     @Test
     public void testLoggingIfError() {
         given().
-                baseUri("https://api.postman.com/").
-                header("x-api-key", "PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594").
-                log().headers().
+                baseUri("https://api.postman.com/")
+                .header("x-api-key", "PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594")
+                .log().headers()
 
-                when().
-                get("/workspaces").
+                .when()
+                .get("/workspaces")
 
-                then().
-                log().ifError()
+                .then()
+                .log().ifError()
                 .assertThat()
                 .statusCode(200);
     }

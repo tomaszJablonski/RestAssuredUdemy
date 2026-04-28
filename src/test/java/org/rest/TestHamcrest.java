@@ -18,14 +18,16 @@ public class TestHamcrest {
         given().
                 baseUri("https://api.postman.com/").
                 header("x-api-key","PMAK-69bd76a781b5b600017f6c53-2c2523ed204eb8972251cec679e2e2e594").
+
                 when().
                 get("/workspaces").
+
                 then().
                 log().all()
                 .assertThat()
                 .statusCode(200)
-                .body("workspaces.name", contains("My Workspace3", "My Workspace4", "My Workspace5"),
-                        "workspaces.name", containsInAnyOrder("My Workspace4", "My Workspace3", "My Workspace5"),
+                .body("workspaces.name", contains("My Workspace3", "My Workspace4", "My Workspace5"), //jest ale tylko w ustalonej kolejności
+                        "workspaces.name", containsInAnyOrder("My Workspace4", "My Workspace3", "My Workspace5"), // jest w obojętnie jakiej kolejności
                         "workspaces.name", is(not(empty())),  //czy json jest pusty lub nie
                         "workspaces.name", is(not(emptyArray())), // czy lista jest pusta czy nie
                         "workspaces.name", hasSize(3), // jaki ma rozmiar dany element
