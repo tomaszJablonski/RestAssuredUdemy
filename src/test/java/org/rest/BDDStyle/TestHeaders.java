@@ -1,4 +1,4 @@
-package org.rest;
+package org.rest.BDDStyle;
 
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 public class TestHeaders {
 

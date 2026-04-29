@@ -1,4 +1,4 @@
-package org.rest;
+package org.rest.BDDStyle;
 
 import io.restassured.config.LogConfig;
 import org.testng.annotations.Test;

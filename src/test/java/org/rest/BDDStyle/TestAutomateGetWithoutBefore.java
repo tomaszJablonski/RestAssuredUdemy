@@ -1,4 +1,4 @@
-package org.rest;
+package org.rest.BDDStyle;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class TestAutomateGet {
+public class TestAutomateGetWithoutBefore {
 
     @Test
     public void getPositiveAssertBody() {
